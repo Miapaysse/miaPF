@@ -20,3 +20,6 @@ https://youtu.be/LR_FgObfuCw?si=R0bFJjI4eRT_ecqg
 GIT:https://github.com/0015/ThatProject/tree/master/FIREBASE
 
 
+https://flutterawesome.com/esp32lm35max30102firebase-databaseflutter/
+
+

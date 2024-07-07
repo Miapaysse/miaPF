@@ -1,0 +1,22 @@
+
+
+PROYECTO
+API: AIzaSyC4f54p7k2UfNDW8aCVP60WkME1_V_8cmQ
+ID:esp32-firebase-demo-5b90d
+
+Realtime database>
+URL DATABASE: https://esp32-firebase-demo-5b90d-default-rtdb.firebaseio.com/
+Tutorial:
+https://randomnerdtutorials.com/esp32-firebase-realtime-database/
+https://randomnerdtutorials.com/esp32-firebase-web-app/
+https://www.youtube.com/watch?v=aO92B-K4TnQ
+
+Firestore database>
+Tutorial:
+https://www.youtube.com/watch?v=aAUIlCWs_bc
+https://youtu.be/KV0D8nrsBLg?si=qHhL-F7miXreyNp5
+https://youtu.be/KiF9uGFkA_o?si=JNH2F1Jvs210fic-
+https://youtu.be/LR_FgObfuCw?si=R0bFJjI4eRT_ecqg
+GIT:https://github.com/0015/ThatProject/tree/master/FIREBASE
+
+

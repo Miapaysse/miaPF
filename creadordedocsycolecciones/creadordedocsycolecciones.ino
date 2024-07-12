@@ -114,8 +114,8 @@ void loop() {
 
 void crearDoc(String path) {
 
-  if (Firebase.ready() && (millis() - dataMillis > 200 || dataMillis == 0)) {
-    dataMillis = millis();
+  if (Firebase.ready()) {
+    
 
     // For the usage of FirebaseJson, see examples/FirebaseJson/BasicUsage/Create_Edit_Parse/Create_Edit_Parse.ino
     FirebaseJson content;

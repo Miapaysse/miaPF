@@ -11,7 +11,7 @@
 
 
 
-#define POTE 23
+#define POTE 2
 
 
 
@@ -41,7 +41,7 @@ unsigned long dataMillisGet = 0;
 unsigned long dataMillisCreate = 0;
 int count = 0;
 
-int valorPote = 0;
+float valorPote = 0;
 float valoresPote[3];
 
 bool taskCompleted = false;
@@ -104,8 +104,11 @@ void loop() {
   //crearDoc("FLEXs/flex2");
   //crearDoc("GYROs/gyro1");
   //crearDoc("GYROs/gyro2");
+  valorPote = analogRead(POTE);
+  Serial.print("Valor pote: ");
+  Serial.println(valorPote);
   update("FLEXs/flex1", "Saludo1");
-  getDoc("FLEXs/flex1", "Saludo1");
+  //getDoc("FLEXs/flex1", "Saludo1");
 }
 
 void crearDoc(String path) {
@@ -205,7 +208,11 @@ void update(String path1, String path2) {
     // For the usage of FirebaseJson, see examples/FirebaseJson/BasicUsage/Create_Edit_Parse/Create_Edit_Parse.ino
     FirebaseJson content;
 
-    String txt = "Holi " + String(count);
+    // String txt = "Holi " + String(count);
+    valorPote = analogRead(POTE);
+    Serial.print("Valor pote: ");
+    Serial.println(valorPote);
+    String txt = String(count) + "- " + String(valorPote);
     content.set("values/[1]/stringValue", txt);
 
     // Set the transformation content.

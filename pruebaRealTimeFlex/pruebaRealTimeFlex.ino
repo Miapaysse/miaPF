@@ -60,7 +60,7 @@ unsigned long ciclo = 0.5;
 
 //WiFiClientSecure client;
 
-String idPersona = "0McCwr1HeJVrlF7FsFTf";
+String idPersona = "ukmlaNEJSykBmvygrkKm";
 
 int analogicoFlex1 = 0;
 long int flex1 = 0;

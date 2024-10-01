@@ -136,9 +136,9 @@ void setup() {
   uid = auth.token.uid.c_str();
   Serial.print("User UID: ");
   Serial.println(uid);
-
+  Serial.println(idPersona);
   // Update database path
-  databasePath = "/UsersData/" + uid + "/readings";
+  databasePath = "/UsersData/" + uid + idPersona +  "/readings";
 }
 
 void loop() {
@@ -190,6 +190,7 @@ void enviarValores(float angulo , String id) {
     Serial.println(angulo);
 
     parentPath = databasePath + "/" + String(timestamp);
+    Serial.println(databasePath);
 
     json.set(angPath.c_str(), String(angulo));
     json.set(idPath.c_str(), String(id));

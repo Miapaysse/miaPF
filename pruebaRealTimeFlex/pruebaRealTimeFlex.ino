@@ -42,6 +42,7 @@ String uid;
 String databasePath;
 // Database child nodes
 String angPath = "/FLEX1";
+String idPath ="/ID";
 String timePath = "/timestamp";
 
 // Parent Node (to be updated in every loop)
@@ -54,10 +55,12 @@ const char* ntpServer = "pool.ntp.org";
 
 // Timer variables (send new readings every three minutes)
 unsigned long sendDataPrevMillis = 0;
-unsigned long ciclo = 30;
+unsigned long ciclo = 0.5;
 
 
 //WiFiClientSecure client;
+
+String idPersona = "0McCwr1HeJVrlF7FsFTf";
 
 int analogicoFlex1 = 0;
 long int flex1 = 0;
@@ -144,7 +147,7 @@ void loop() {
   //Serial.println(analogicoFlex1);
   obtenerTension(analogicoFlex1);
   angulos = obtenerAngulo(tension);
-  enviarValores(angulos);
+  enviarValores(angulos, idPersona);
 }
 
 
@@ -173,7 +176,7 @@ float obtenerAngulo(float tension) {
 
 
 
-void enviarValores(float angulo) {
+void enviarValores(float angulo , String id) {
 
   if (Firebase.ready() && (millis() - sendDataPrevMillis > (ciclo * 1000) || sendDataPrevMillis == 0)) {
     sendDataPrevMillis = millis();
@@ -189,6 +192,7 @@ void enviarValores(float angulo) {
     parentPath = databasePath + "/" + String(timestamp);
 
     json.set(angPath.c_str(), String(angulo));
+    json.set(idPath.c_str(), String(id));
     json.set(timePath, String(timestamp));
     Serial.printf("Set json... %s\n", Firebase.RTDB.setJSON(&fbdo, parentPath.c_str(), &json) ? "ok" : fbdo.errorReason().c_str());
   }

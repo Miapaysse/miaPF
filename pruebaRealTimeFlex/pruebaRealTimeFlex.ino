@@ -21,14 +21,14 @@ unsigned long tiempo;
 #define WIFI_PASSWORD "Silvermia18"
 
 // Insert Firebase project API Key
-#define API_KEY "AIzaSyAbUZTgihkJiy2RMl-l2uzArO2Ac7pDNRw"
+#define API_KEY "AIzaSyC1S2t9MWIYYwDYgsjIiLeTxsO-WQzm1qk"
 
 // Insert Authorized Email and Corresponding Password
-#define USER_EMAIL "User@gmail.com"
+#define USER_EMAIL "user@gmail.com"
 #define USER_PASSWORD "123456"
 
 // Insert RTDB URLefine the RTDB URL
-#define DATABASE_URL "https://tp5-firebase-e034e-default-rtdb.firebaseio.com/"
+#define DATABASE_URL "https://back-on-track-46f4e-default-rtdb.firebaseio.com/"
 
 // Define Firebase objects
 FirebaseData fbdo;
@@ -54,21 +54,21 @@ const char* ntpServer = "pool.ntp.org";
 
 // Timer variables (send new readings every three minutes)
 unsigned long sendDataPrevMillis = 0;
-unsigned long ciclo = 6;
+unsigned long ciclo = 30;
 
 
 //WiFiClientSecure client;
 
-float analogicoFlex1 = 0;
-float flex1 = 0;
+int analogicoFlex1 = 0;
+long int flex1 = 0;
 float tension = 0;
 float flex = 0;
 float angulo = 0;
 float angulos = 0;
 
-float V_min = 0.2;  // Sustituir con el voltaje medido a 0 grados
-float V_max = 4;    // Sustituir con el voltaje medido a 180 grados
-float V_90 = 2.;
+float V_min = 1;    //0.2;  // Sustituir con el voltaje medido a 0 grados
+float V_max = 4.5;  // Sustituir con el voltaje medido a 180 grados
+float V_90 = 2.5;
 
 void initWiFi() {
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -141,6 +141,7 @@ void setup() {
 void loop() {
 
   analogicoFlex1 = analogRead(FLEX1);
+  //Serial.println(analogicoFlex1);
   obtenerTension(analogicoFlex1);
   angulos = obtenerAngulo(tension);
   enviarValores(angulos);
@@ -160,14 +161,14 @@ float obtenerAngulo(float tension) {
   if (tension >= V_min && tension <= V_max) {
     // Cálculo del ángulo usando interpolación lineal
     angulo = (tension - V_min) / (V_max - V_min) * 180;
-  } else {
+  } /*else {
     angulo = 0;  // Valor fuera de rango o error
-  }
+  }*/
 
   Serial.print("Angulo: ");
   Serial.println(angulo);
 
-  return angulo
+  return angulo;
 }
 
 

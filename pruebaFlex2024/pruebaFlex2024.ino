@@ -1,18 +1,12 @@
-#define FLEX1 13
-#define FLEX2 12
+#define FLEX1 36
+#define FLEX2 39
 
-
-
-float impresion1 = 0;
-float impresion2 = 0;
 float tension = 0;
-float flex = 0;
 float angulo = 0;
 
-float V_min = 0.2;  // Sustituir con el voltaje medido a 0 grados
-float V_max = 4;  // Sustituir con el voltaje medido a 180 grados
-float V_90 = 2.;
-
+// Voltage values corresponding to the angles
+float V_min = 0.2;  // Voltage at 180 degrees
+float V_max = 2.4;  // Voltage at 0 degrees
 
 void setup() {
   pinMode(FLEX1, INPUT);
@@ -22,44 +16,33 @@ void setup() {
 }
 
 void loop() {
-
-  flex = analogRead(FLEX1);
-  obtenerTension(flex);
-  obtenerAngulo(tension);
-
-  //delay(500);
-
-  //  Serial.print("Flex 50k: ");
-  // Serial.println(impresion1);
-
-  /*
-    impresion2 = analogRead(FLEX2);
-    Serial.print("Flex 30k: ");
-    Serial.println(impresion2);
-  */
+  float flex = analogRead(FLEX1);
+  tension = obtenerTension(flex);
+  angulo = obtenerAngulo(tension);
+  delay(500);  // Delay for readability
 }
 
-
-
-void obtenerTension(float flex) {
-  tension = (flex * 3.3) / 1024;
-  //Serial.print("tensión: ");
+float obtenerTension(float flex) {
+  // Convert the analog reading (0-4095) to a voltage (0-3.3V)
+  float tension = (flex * 3.3) / 4095;
+  //Serial.print("Tension: ");
   //Serial.println(tension);
+  return tension;
 }
 
 float obtenerAngulo(float tension) {
+  float angulo;
 
-  //angulo = ((tension - 0.997) / (1.87 - 0.997)) * 180;
-  //((tension * (-90)) + 180);
+  // Ensure tension is within the expected range for reliable interpolation
   if (tension >= V_min && tension <= V_max) {
-    // Cálculo del ángulo usando interpolación lineal
-    angulo = (tension - V_min) / (V_max - V_min) * 180;
+    // Calculate the angle using linear interpolation
+    angulo = (V_max - tension) / (V_max - V_min) * 180;
   } else {
-    angulo = 0;  // Valor fuera de rango o error
+    angulo = 0;  // Out of range or error
   }
 
   Serial.print("Angulo: ");
   Serial.println(angulo);
 
-  return angulo
+  return angulo;
 }
